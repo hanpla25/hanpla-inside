@@ -1,31 +1,27 @@
 import Image from "next/image";
-import { useState } from "react";
 import { createTouchSwipeHandlers } from "../lib/utils";
 import { useRecentVisitStore } from "../store/useRecentVisitStore";
-import { placeholderRecentGalleryList } from "../lib/placeholder-data";
 
 export default function RecentVisitModal() {
-  const recentGalleryList: RecentGallery[] = placeholderRecentGalleryList;
-  const ITEM_PER_PAGE: number = 6;
-
-  const { isOpen, close } = useRecentVisitStore();
-  const [currentPage, setCurrentPage] = useState(0);
-
-  const totalPages: number = Math.ceil(
-    recentGalleryList.length / ITEM_PER_PAGE
-  );
-  const displayItems: RecentGallery[] = recentGalleryList.slice(
-    currentPage * ITEM_PER_PAGE,
-    (currentPage + 1) * ITEM_PER_PAGE
-  );
-
-  const touchHandlers = createTouchSwipeHandlers({
-    onSwipeLeft: () =>
-      setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1)),
-    onSwipeRight: () => setCurrentPage((prev) => Math.max(prev - 1, 0)),
-  });
+  const {
+    isOpen,
+    close,
+    recentGalleryList,
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    displayItems,
+  } = useRecentVisitStore();
 
   if (!isOpen) return null;
+
+  const total: number = totalPages();
+  const items: RecentGallery[] = displayItems();
+
+  const touchHandlers = createTouchSwipeHandlers({
+    onSwipeLeft: () => setCurrentPage(Math.min(currentPage + 1, total - 1)),
+    onSwipeRight: () => setCurrentPage(Math.max(currentPage - 1, 0)),
+  });
 
   if (recentGalleryList.length === 0) {
     return (
@@ -46,8 +42,7 @@ export default function RecentVisitModal() {
         className="grid grid-cols-2 grid-rows-3 gap-2 text-sm text-gray-700"
         {...touchHandlers}
       >
-        {/* 리스트 */}
-        {displayItems.map((item, index) => (
+        {items.map((item, index) => (
           <li
             key={index}
             className="flex items-center justify-between border-b border-gray-300 p-2 truncate"
@@ -59,9 +54,8 @@ export default function RecentVisitModal() {
       </ul>
 
       <div className="flex justify-between items-center py-2 px-2 bg-[#f9fafc]">
-        {/* 페이지 버튼 */}
         <div className="flex gap-2">
-          {Array.from({ length: totalPages }).map((_, i) => (
+          {Array.from({ length: total }).map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentPage(i)}
@@ -72,7 +66,6 @@ export default function RecentVisitModal() {
           ))}
         </div>
 
-        {/* 닫기 버튼 */}
         <button onClick={close}>닫기</button>
       </div>
     </div>

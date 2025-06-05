@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import SeparatorDot from "../separator-bar";
-import { placeholderBestPost } from "@/app/lib/placeholder-data";
 
-export default function RealtimeBestList() {
-  const bestPostList: BestPostList[] = placeholderBestPost;
+interface Props {
+  bestPostList: BestPostList[];
+}
 
+export default function RealtimeBestList({ bestPostList }: Props) {
   if (bestPostList.length === 0) {
     return (
       <div className="flex justify-center items-center p-30">

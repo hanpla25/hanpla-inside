@@ -11,3 +11,9 @@ interface BestPostList {
   timestamp: string;
   comment_count: number;
 }
+
+interface CategoryList {
+  id: number;
+  name: string;
+  abbr: string;
+}

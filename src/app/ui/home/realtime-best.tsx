@@ -1,11 +1,15 @@
 import RealtimeBestHeader from "./realtime-best-header";
 import RealtimeBestList from "./realtime-best-list";
 
-export default function RealtimeBest() {
+interface Props {
+  bestPostList: BestPostList[];
+}
+
+export default function RealtimeBest({ bestPostList }: Props) {
   return (
     <div>
       <RealtimeBestHeader />
-      <RealtimeBestList />
+      <RealtimeBestList bestPostList={bestPostList} />
     </div>
   );
 }
