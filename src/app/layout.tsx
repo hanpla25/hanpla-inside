@@ -4,7 +4,6 @@ import "./globals.css";
 import Header from "./ui/header";
 import Nav from "./ui/nav";
 import Footer from "./ui/footer";
-import SuspensePreviousPageComponent from "./hook/SuspensePreviousPageComponent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +33,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-7xl mx-auto`}
       >
-        <SuspensePreviousPageComponent />
         <Header />
         <Nav />
         {children}

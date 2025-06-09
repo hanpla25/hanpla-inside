@@ -22,7 +22,7 @@ export default function RealtimeBestList({ bestPostList }: Props) {
         {bestPostList.map((post, i) => (
           <li key={i} className="px-2 py-4">
             <Link
-              href={`${post.abbr}/${post.id}`}
+              href={`/gallery/${post.abbr}/${post.id}`}
               className="flex flex-col gap-2"
             >
               <div className="flex justify-between">

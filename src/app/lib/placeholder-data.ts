@@ -83,17 +83,50 @@ export const placeholderRecentGalleryList: RecentGallery[] = [
 export const placeholderCategoryList: CategoryList[] = [
   {
     id: 1,
-    name: "리그 오브 레전드",
-    abbr: "lol",
+    abbr: "realtimebest",
+    name: "실시간 베스트",
   },
   {
     id: 2,
-    name: "리그 오브 레전드",
     abbr: "lol",
+    name: "리그 오브 레전드",
   },
   {
     id: 3,
-    name: "리그 오브 레전드",
-    abbr: "lol",
+    abbr: "mp",
+    name: "메이플",
+  },
+];
+
+export const placeholderPostList: PostList[] = [
+  {
+    id: 1,
+    title: "ㅁㄴㅇ",
+    nickname: "승현",
+    view: 5,
+    likes: 0,
+    comment_count: 1,
+    ip_adress: undefined,
+    created_at: "13:30",
+  },
+  {
+    id: 2,
+    title: "ㅁㄴㅇ",
+    nickname: "승현",
+    view: 5,
+    likes: 0,
+    comment_count: 1,
+    ip_adress: undefined,
+    created_at: "13:30",
+  },
+  {
+    id: 3,
+    title: "ㅁㄴㅇ",
+    nickname: "ㅇㅇ",
+    view: 5,
+    likes: 0,
+    comment_count: 1,
+    ip_adress: "123.456",
+    created_at: "13:30",
   },
 ];

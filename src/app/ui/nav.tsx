@@ -14,7 +14,7 @@ export default function Nav() {
         <span
           className={`font-bold ${isActive ? "text-yellow-300" : "text-white"}`}
         >
-          전체 갤러리
+          갤러리
         </span>
       </Link>
     </nav>

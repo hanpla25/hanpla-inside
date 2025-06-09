@@ -1,15 +1,20 @@
-"use client";
+import LoginForm from "@/app/ui/login/login-form";
+import { redirect } from "next/navigation";
 
-import { useSearchParams, useRouter } from "next/navigation";
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
-export default function LoginPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+export default async function LoginPage(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams;
+  const callbackUrl = searchParams.callbackUrl;
+  const isLogin = false;
 
-  const handleLogin = async () => {
-    router.replace(callbackUrl);
-  };
+  if (isLogin) {
+    redirect("/");
+  }
 
-  return <button onClick={handleLogin}>로그인</button>;
+  if (!callbackUrl) {
+    redirect(`/login?callbackUrl=${encodeURIComponent("/")}`);
+  }
+
+  return <LoginForm />;
 }
