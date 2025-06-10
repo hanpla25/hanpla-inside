@@ -1,13 +1,11 @@
-"use client";
-
 import { Send } from "lucide-react";
-import { useSearchParams } from "next/navigation";
 import LoginLinks from "./login-links";
 
-export default function LoginForm() {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+interface Props {
+  callbackUrl: string | string[];
+}
 
+export default function LoginForm({ callbackUrl }: Props) {
   return (
     <form className="space-y-3 flex-1 rounded-lg bg-gray-50 px-6 pb-18 pt-8">
       <h1 className="mb-3 text-2xl">로그인</h1>

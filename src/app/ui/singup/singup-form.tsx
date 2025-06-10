@@ -1,12 +1,6 @@
-"use client";
-
-import { Send, UserRoundCheck } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { UserRoundCheck } from "lucide-react";
 
 export default function SignupForm() {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
-
   return (
     <form className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
@@ -25,7 +19,8 @@ export default function SignupForm() {
                 id="name"
                 name="name"
                 type="text"
-                placeholder="아이디를 입력해주세요."
+                placeholder="이름을 입력해주세요."
+                minLength={2}
                 required
               />
             </div>
@@ -44,6 +39,7 @@ export default function SignupForm() {
                 name="id"
                 type="text"
                 placeholder="아이디를 입력해주세요."
+                minLength={4}
                 required
               />
             </div>
@@ -63,12 +59,11 @@ export default function SignupForm() {
                 name="password"
                 placeholder="비밀번호를 입력해주세요."
                 required
-                minLength={6}
+                minLength={4}
               />
             </div>
           </div>
         </div>
-        <input type="hidden" name="redirectTo" value={callbackUrl} />
         <button className="flex mt-4 w-full justify-center items-center">
           <UserRoundCheck className="mr-2" size={18} /> <span>회원가입</span>
         </button>

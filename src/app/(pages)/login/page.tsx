@@ -16,5 +16,5 @@ export default async function LoginPage(props: { searchParams: SearchParams }) {
     redirect(`/login?callbackUrl=${encodeURIComponent("/")}`);
   }
 
-  return <LoginForm />;
+  return <LoginForm callbackUrl={callbackUrl} />;
 }

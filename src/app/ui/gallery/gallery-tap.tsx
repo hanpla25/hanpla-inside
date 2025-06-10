@@ -29,7 +29,7 @@ export default function GalleryTap() {
         href={`/gallery/${abbr}`}
         className={`flex-1 text-center ${!isRecommend ? activeClass : ""}`}
       >
-        <button>전체글</button>
+        <button>전체</button>
       </Link>
       <SeparatorDot />
       <Link

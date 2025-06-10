@@ -1,10 +1,9 @@
+import { placeholderCategoryList } from "@/app/lib/placeholder-data";
 import Link from "next/link";
 
-interface Props {
-  categoryList: CategoryList[];
-}
+export default function CategoryList() {
+  const categoryList: CategoryList[] = placeholderCategoryList;
 
-export default function CategoryList({ categoryList }: Props) {
   if (categoryList.length === 0) {
     return (
       <div className="flex justify-center items-center p-30">

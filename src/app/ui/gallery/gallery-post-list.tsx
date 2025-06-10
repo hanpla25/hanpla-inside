@@ -1,15 +1,15 @@
-"use client";
 import { fetchPostList } from "@/app/lib/data";
 import Link from "next/link";
 import SeparatorDot from "../separator-bar";
-import { useParams, useSearchParams } from "next/navigation";
+import { formatDateTime } from "@/app/lib/utils";
 
-export default function GalleryPostList() {
-  const { abbr } = useParams();
-  const searchParams = useSearchParams();
+interface Props {
+  abbr: string;
+  recomend?: string;
+}
 
-  const recomend = searchParams.get("recomend");
-  const list = fetchPostList();
+export default function GalleryPostList({ abbr, recomend }: Props) {
+  const list = fetchPostList(abbr);
 
   return (
     <ul>
@@ -24,12 +24,10 @@ export default function GalleryPostList() {
             <li className="p-2 border-b border-gray-400">
               <div>{item.title}</div>
               <div className="text-xs text-gray-600">
-                <span>
-                  {item.nickname}
-                  {item.ip_adress ? `(${item.ip_adress})` : null}
-                </span>
+                <span>{item.nickname}</span>
+                {item.ip_adress ? `(${item.ip_adress})` : null}
                 <SeparatorDot />
-                <span>{item.created_at}</span>
+                {formatDateTime(item.created_at, "time")}
                 <SeparatorDot />
                 <span>조회수 {item.view}</span>
                 <SeparatorDot />

@@ -1,17 +1,20 @@
-import { ParamValue } from "next/dist/server/request/params";
 import {
   placeholderCategoryList,
   placeholderPostList,
+  placeholderPostMain,
 } from "./placeholder-data";
 
-export function fetchGalleryName(abbr: ParamValue): string | undefined {
-  const data = placeholderCategoryList;
-  const gallery = data.find((item) => item.abbr === abbr);
+export function fetchGalleryName(abbr: string) {
+  const gallery = placeholderCategoryList.find((item) => item.abbr === abbr);
+
   return gallery?.name;
 }
 
-export function fetchPostList() {
-  const data = placeholderPostList;
+export function fetchPostList(abbr: string) {
+  const list = placeholderPostList.filter((post) => post.abbr === abbr);
 
-  return data;
+  return list;
+}
+export function fetchPostMain(id: string) {
+  return placeholderPostMain.find((post) => post.post_id === Number(id));
 }

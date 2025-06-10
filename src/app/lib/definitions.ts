@@ -25,10 +25,26 @@ interface Galleries {
 
 interface PostList {
   id: number;
+  abbr: string;
   title: string;
   nickname: string;
   view: number;
   likes: number;
+  comment_count: number;
+  ip_adress?: string;
+  created_at: string;
+}
+
+interface PostMain {
+  id: number;
+  post_id: number;
+  abbr: string;
+  title: string;
+  nickname: string;
+  content: string;
+  view: number;
+  likes: number;
+  dislikes: number;
   comment_count: number;
   ip_adress?: string;
   created_at: string;

@@ -1,9 +1,16 @@
 import GalleryHeader from "@/app/ui/gallery/gallery-header";
 
-export default function WritePage() {
+type Params = Promise<{ abbr: string }>;
+
+export default async function WritePage(props: { params: Params }) {
+  const params = await props.params;
+  const abbr = params.abbr;
+  
+  const writingPage = true;
+
   return (
     <div>
-      <GalleryHeader />
+      <GalleryHeader abbr={abbr} writingPage={writingPage} />
     </div>
   );
 }
