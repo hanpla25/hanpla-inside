@@ -5,9 +5,10 @@ import PostLikeButton from "./post-likeButton";
 
 interface Props {
   post: PostMain | undefined;
+  abbr: string;
 }
 
-export default function PostMain({ post }: Props) {
+export default function PostMain({ post, abbr }: Props) {
   if (!post)
     return <div className="py-30 text-center">게시글을 찾을 수 없습니다</div>;
 
@@ -39,7 +40,7 @@ export default function PostMain({ post }: Props) {
         <PostLikeButton post={post} />
       </main>
 
-      <PostButtons />
+      <PostButtons abbr={abbr} />
     </div>
   );
 }

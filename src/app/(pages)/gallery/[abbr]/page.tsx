@@ -1,9 +1,21 @@
 import GalleryTap from "@/app/ui/gallery/gallery-tap";
 
-export default async function GalleryPage() {
+type Params = Promise<{ abbr: string }>;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+export default async function GalleryPage(props: {
+  params: Params;
+  searchParams: SearchParams;
+}) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
+
+  const { abbr } = params;
+  const recomend = searchParams.recomend;
+
   return (
     <div>
-      <GalleryTap />
+      <GalleryTap abbr={abbr} recomend={recomend} />
     </div>
   );
 }

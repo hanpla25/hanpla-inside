@@ -1,22 +1,28 @@
 "use client";
 
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import SeparatorDot from "../separator-bar";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function GalleryTap() {
+interface Props {
+  abbr: string;
+  recomend?: string | string[];
+}
+
+export default function GalleryTap({ abbr, recomend }: Props) {
   const router = useRouter();
-  const { abbr } = useParams();
-  const searchParams = useSearchParams();
+
+  const isRecommend = recomend === "1";
 
   const [sizeValue, setSizeValue] = useState(10);
-  const isRecommend = searchParams.get("recomend") === "1";
 
   const activeClass = "text-blue-700 font-semibold border-b-3 border-blue-700";
 
   const onChangeSize = (value: number) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
+
+    if (isRecommend) params.set("recomend", "1");
     params.set("size", value.toString());
 
     setSizeValue(value);

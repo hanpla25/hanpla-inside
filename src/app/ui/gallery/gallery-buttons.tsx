@@ -1,14 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
 
-export default function GalleryButton() {
-  const { id, abbr } = useParams();
-  const pathname = usePathname();
-
-  if (id || pathname === `/write/${abbr}`) return null;
-
+export default function GalleryButton({ abbr }: { abbr: string }) {
   return (
     <div className="flex p-2 space-x-2">
       <Link
