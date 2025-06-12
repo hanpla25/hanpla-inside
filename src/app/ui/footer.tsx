@@ -7,7 +7,7 @@ export default function Footer() {
   const pathname: string = usePathname();
 
   return (
-    <footer className="bg-[#3b4890] flex justify-center py-4 max-w-7xl mx-auto">
+    <footer className="bg-[#3b4890] flex justify-center py-4 max-w-7xl mx-auto pt-20">
       <div className="w-11/12 flex justify-between gap-2">
         <Link
           href={`/login?callbackUrl=${encodeURIComponent(pathname)}`}
