@@ -63,7 +63,7 @@ export function createTouchSwipeHandlers({
 
 export function formatDateTime(
   dateInput: string,
-  type: "time" | "full"
+  type: "time" | "full" | "monthTime"
 ): string {
   const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
   const now = new Date();
@@ -84,6 +84,11 @@ export function formatDateTime(
   if (type === "time") {
     return isToday ? time : dayMonth;
   }
+
+  if (type === "monthTime") {
+    return `${dayMonth} ${time}`;
+  }
+
   if (type === "full") return full;
 
   return full;

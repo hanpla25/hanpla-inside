@@ -1,3 +1,4 @@
+import { fetchPostList } from "@/app/lib/data";
 import GalleryHeader from "@/app/ui/gallery/gallery-header";
 import GalleryPostList from "@/app/ui/gallery/gallery-post-list";
 import GalleryTap from "@/app/ui/gallery/gallery-tap";
@@ -19,11 +20,13 @@ export default async function GalleryPage(props: {
       : undefined;
   const writingPage = false;
 
+  const list = fetchPostList(abbr);
+
   return (
     <div>
       <GalleryHeader abbr={abbr} writingPage={writingPage} />
       <GalleryTap />
-      <GalleryPostList abbr={abbr} recomend={recomend} />
+      <GalleryPostList abbr={abbr} recomend={recomend} list={list} />
     </div>
   );
 }

@@ -1,49 +1,45 @@
-import { fetchPostMain } from "@/app/lib/data";
 import SeparatorDot from "../separator-bar";
 import { formatDateTime } from "@/app/lib/utils";
-import PostComent from "./post-coment";
+import PostButtons from "./post-buttons";
+import PostLikeButton from "./post-likeButton";
 
 interface Props {
-  postId: string;
+  post: PostMain | undefined;
 }
 
-export default function PostMain({ postId }: Props) {
-  const post = fetchPostMain(postId as string);
-
-  if (!post) return <div>게시글을 찾을 수 없습니다</div>;
+export default function PostMain({ post }: Props) {
+  if (!post)
+    return <div className="py-30 text-center">게시글을 찾을 수 없습니다</div>;
 
   return (
-    <div>
-      <header>
-        <h1>{post.title}</h1>
-        <div>
-          <span>{post.nickname}</span>
+    <div className="">
+      <header className="px-2 py-2 space-y-1 border-y border-gray-200">
+        <h1 className="font-bold">{post.title}</h1>
+        <div className="text-xs text-gray-800">
+          <span className="mr-2">{post.nickname}</span>
           <SeparatorDot />
-          <span>{formatDateTime(post.created_at, "full")}</span>
+          <span className="ml-2">
+            {formatDateTime(post.created_at, "full")}
+          </span>
         </div>
       </header>
 
-      <main>
+      <div className="text-xs text-gray-800 px-2 py-2">
+        <span>조회수 {post.view}</span>
+        <SeparatorDot />
+        <span>추천 {post.likes}</span>
+        <SeparatorDot />
+        <span className="bg-gray-200 rounded-2xl px-2 py-0.5">
+          댓글 <span className="text-red-500">{post.comment_count}</span>
+        </span>
+      </div>
+
+      <main className="px-2">
         <p>{post.content}</p>
-        <div>
-          <button>{post.likes}</button>
-          <button>{post.dislikes}</button>
-        </div>
+        <PostLikeButton post={post} />
       </main>
 
-      <div>
-        <button>목록보기</button>
-        <button>글쓰기</button>
-      </div>
-
-      <div>
-        <div>
-          <h2>댓글 [{post.comment_count}]</h2>
-          <button>새로고침</button>
-        </div>
-
-        <PostComent />
-      </div>
+      <PostButtons />
     </div>
   );
 }

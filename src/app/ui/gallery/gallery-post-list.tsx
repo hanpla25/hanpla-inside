@@ -1,4 +1,3 @@
-import { fetchPostList } from "@/app/lib/data";
 import Link from "next/link";
 import SeparatorDot from "../separator-bar";
 import { formatDateTime } from "@/app/lib/utils";
@@ -6,11 +5,10 @@ import { formatDateTime } from "@/app/lib/utils";
 interface Props {
   abbr: string;
   recomend?: string;
+  list: PostList[];
 }
 
-export default function GalleryPostList({ abbr, recomend }: Props) {
-  const list = fetchPostList(abbr);
-
+export default function GalleryPostList({ abbr, recomend, list }: Props) {
   return (
     <ul>
       {list.map((item) => {

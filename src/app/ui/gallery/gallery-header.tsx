@@ -10,9 +10,9 @@ export default function GalleryHeader({ abbr, writingPage }: Props) {
   const galleryName = fetchGalleryName(abbr as string);
 
   return (
-    <div className="flex justify-between p-2">
+    <div className="flex justify-between px-3 py-2 items-center">
       <Link href={`/gallery/${abbr}`}>
-        <h1 className="font-bold">{galleryName} 갤러리</h1>
+        <h1 className="font-bold">{galleryName}</h1>
       </Link>
       {!writingPage && (
         <Link href={`/gallery/${abbr}/write`}>

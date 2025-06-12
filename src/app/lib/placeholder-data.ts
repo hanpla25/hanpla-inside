@@ -194,3 +194,12 @@ export const placeholderPostMain: PostMain[] = [
     created_at: "2025-06-10T11:49:18+09:00",
   },
 ];
+
+export const placeholderCommentInfo: CommentInfo = {
+  id: 1,
+  nickname: "승현",
+  ip_adress: undefined,
+  content: "지리긴 함",
+  created_at: "2025-06-10T11:49:18+09:00",
+  is_reply: false,
+};

@@ -49,3 +49,12 @@ interface PostMain {
   ip_adress?: string;
   created_at: string;
 }
+
+interface CommentInfo {
+  id: number;
+  nickname: string;
+  ip_adress?: string;
+  content: string;
+  created_at: string;
+  is_reply: boolean;
+}
