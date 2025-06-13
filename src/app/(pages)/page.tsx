@@ -1,11 +1,7 @@
-import { placeholderBestPost } from "../lib/placeholder-data";
-import RealtimeBest from "../ui/home/realtime-best";
-
-export default function Home() {
-  const bestPostList: BestPostList[] = placeholderBestPost;
+export default async function Home() {
   return (
     <div>
-      <RealtimeBest bestPostList={bestPostList} />
+      <h1>hello</h1>
     </div>
   );
 }

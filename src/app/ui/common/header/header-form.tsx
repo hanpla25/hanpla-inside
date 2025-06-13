@@ -1,17 +1,16 @@
 import Image from "next/image";
-import SeparatorDot from "./separator-bar";
-import { RecentVisitButton } from "./buttons";
+import Separator from "../separator";
+import { RecentVisitButton } from "../recent-visit/recent-visit-button";
+import { ModalToggleProps } from "@/app/lib/types";
 
-export default function HeaderForm() {
+export default function HeaderForm({ setIsOpen }: ModalToggleProps) {
   return (
     <div className="flex items-center space-x-4 bg-white w-full px-2">
-      {/* 폼 */}
       <form action="" className="flex items-center flex-1">
         <label htmlFor="searchGallery" className="sr-only">
           갤러리 검색
         </label>
 
-        {/* 인풋 */}
         <input
           type="text"
           name="searchGallery"
@@ -20,7 +19,6 @@ export default function HeaderForm() {
           className="py-1.5 text-sm focus:outline-none w-full"
         />
 
-        {/* 검색 아이콘 */}
         <button
           type="submit"
           className="flex items-center justify-center"
@@ -35,11 +33,9 @@ export default function HeaderForm() {
         </button>
       </form>
 
-      {/* 분리 막대 */}
-      <SeparatorDot />
+      <Separator />
 
-      {/* 최근 방문 버튼 */}
-      <RecentVisitButton />
+      <RecentVisitButton setIsOpen={setIsOpen} />
     </div>
   );
 }
