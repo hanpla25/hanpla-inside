@@ -1,64 +1,46 @@
-interface TouchSwipeHandlers {
+import { useSwipeable } from "react-swipeable";
+import { RecentGallery } from "./types";
+
+type SwipeDirection = "left" | "right" | "up" | "down";
+
+type UseSwipeableControlProps = {
+  onSwipe?: (direction: SwipeDirection) => void;
   onSwipeLeft?: () => void;
   onSwipeRight?: () => void;
-  threshold?: number;
-}
+  onSwipeUp?: () => void;
+  onSwipeDown?: () => void;
+  delta?: number;
+};
 
-interface SwipeEventHandlers {
-  onTouchStart: (e: React.TouchEvent) => void;
-  onTouchMove: (e: React.TouchEvent) => void;
-  onTouchEnd: () => void;
-}
-
-export function createTouchSwipeHandlers({
+export function useSwipeableControl({
+  onSwipe,
   onSwipeLeft,
   onSwipeRight,
-  threshold = 50,
-}: TouchSwipeHandlers): SwipeEventHandlers {
-  const startYRef = { current: 0 };
-  const startXRef = { current: 0 };
-  const isTouchingRef = { current: false };
-  const dragOffsetRef = { current: 0 };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    isTouchingRef.current = true;
-    startXRef.current = e.touches[0].clientX;
-    startYRef.current = e.touches[0].clientY;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isTouchingRef.current) return;
-
-    const deltaX = e.touches[0].clientX - startXRef.current;
-    const deltaY = e.touches[0].clientY - startYRef.current;
-
-    if (Math.abs(deltaY) > Math.abs(deltaX)) {
-      isTouchingRef.current = false;
-      return;
-    }
-
-    dragOffsetRef.current = deltaX;
-  };
-
-  const handleTouchEnd = () => {
-    if (!isTouchingRef.current) return;
-
-    const offset = dragOffsetRef.current;
-    if (offset < -threshold) {
+  onSwipeUp,
+  onSwipeDown,
+  delta = 30,
+}: UseSwipeableControlProps) {
+  return useSwipeable({
+    onSwipedLeft: () => {
+      onSwipe?.("left");
       onSwipeLeft?.();
-    } else if (offset > threshold) {
+    },
+    onSwipedRight: () => {
+      onSwipe?.("right");
       onSwipeRight?.();
-    }
-
-    isTouchingRef.current = false;
-    dragOffsetRef.current = 0;
-  };
-
-  return {
-    onTouchStart: handleTouchStart,
-    onTouchMove: handleTouchMove,
-    onTouchEnd: handleTouchEnd,
-  };
+    },
+    onSwipedUp: () => {
+      onSwipe?.("up");
+      onSwipeUp?.();
+    },
+    onSwipedDown: () => {
+      onSwipe?.("down");
+      onSwipeDown?.();
+    },
+    delta,
+    trackTouch: true,
+    trackMouse: false,
+  });
 }
 
 export function formatDateTime(
@@ -92,4 +74,56 @@ export function formatDateTime(
   if (type === "full") return full;
 
   return full;
+}
+
+const STORAGE_KEY = "visit_galleries";
+
+export function getRecentGalleries(): RecentGallery[] {
+  function isRecentGallery(obj: any): obj is RecentGallery {
+    return (
+      typeof obj === "object" &&
+      obj !== null &&
+      typeof obj.abbr === "string" &&
+      typeof obj.name === "string" &&
+      typeof obj.link === "string"
+    );
+  }
+
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) return [];
+
+    const parsed = JSON.parse(stored);
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed.filter(isRecentGallery);
+  } catch (error) {
+    console.error("visit_galleries parse error:", error);
+    return [];
+  }
+}
+
+export function setRecentGalleries(newItem: RecentGallery) {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    let items: RecentGallery[] = [];
+
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) {
+        items = parsed;
+      }
+    }
+
+    items = items.filter((item) => item.abbr !== newItem.abbr);
+
+    const newItems = [newItem, ...items];
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newItems));
+
+    return newItems;
+  } catch (error) {
+    console.error("최근 방문 갤러리 저장 오류:", error);
+    return [];
+  }
 }

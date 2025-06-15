@@ -1,7 +1,12 @@
+import { fetchRealtimePosts } from "../lib/data";
+import RealtimeBest from "../ui/home/realtime-best";
+
 export default async function Home() {
+  const realtimeBestData = await fetchRealtimePosts();
+
   return (
     <div>
-      <h1>hello</h1>
+      <RealtimeBest realtimeBestData={realtimeBestData} />
     </div>
   );
 }
