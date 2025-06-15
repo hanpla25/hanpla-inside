@@ -9,7 +9,7 @@ export async function fetchGalleries(): Promise<Gallery[]> {
 
   if (error) {
     console.error(error);
-    redirect("/");
+    return [];
   }
 
   return data;
