@@ -79,13 +79,15 @@ export function formatDateTime(
 const STORAGE_KEY = "visit_galleries";
 
 export function getRecentGalleries(): RecentGallery[] {
-  function isRecentGallery(obj: any): obj is RecentGallery {
+  function isRecentGallery(obj: unknown): obj is RecentGallery {
+    if (typeof obj !== "object" || obj === null) return false;
+
+    const maybe = obj as Record<string, unknown>;
+
     return (
-      typeof obj === "object" &&
-      obj !== null &&
-      typeof obj.abbr === "string" &&
-      typeof obj.name === "string" &&
-      typeof obj.link === "string"
+      typeof maybe.abbr === "string" &&
+      typeof maybe.name === "string" &&
+      typeof maybe.link === "string"
     );
   }
 

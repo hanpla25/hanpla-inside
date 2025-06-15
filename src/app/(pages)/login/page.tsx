@@ -1,3 +1,11 @@
+import LoginForm from "@/app/ui/login/login-form";
+import LoginLinks from "@/app/ui/login/login-links";
+
 export default function LoginPage() {
-  return <div>LoginPage</div>;
+  return (
+    <div>
+      <LoginForm />
+      <LoginLinks />
+    </div>
+  );
 }
