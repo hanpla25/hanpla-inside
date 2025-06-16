@@ -26,3 +26,11 @@ export type RecentGallery = {
   name: string;
   link: string;
 };
+
+export type LoginFormState = {
+  errorMsg?: string;
+  nameErrorMsg?: string;
+  idErrorMsg?: string;
+  passwordErrorMsg?: string;
+  input?: string;
+};
