@@ -27,10 +27,21 @@ export type RecentGallery = {
   link: string;
 };
 
+export type AuthForm = {
+  id: string;
+  password: string;
+  name?: string;
+  redirectTo?: string;
+};
+
 export type LoginFormState = {
   errorMsg?: string;
   nameErrorMsg?: string;
   idErrorMsg?: string;
   passwordErrorMsg?: string;
-  input?: string;
+  input?: {
+    id: string;
+    password: string;
+    name?: string;
+  };
 };

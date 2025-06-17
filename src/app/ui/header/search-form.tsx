@@ -23,7 +23,7 @@ export default function SearchForm() {
         <Image
           src={"/header_search.png"}
           alt="헤더 검색 아이콘"
-          width={20}
+          width={22}
           height={22}
         />
       </button>

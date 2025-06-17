@@ -29,12 +29,15 @@ export default function SignupForm() {
             </div>
             <div className="relative">
               <input
-                className="w-full rounded-md border border-gray-200 py-[9px] pl-8 text-sm outline-2 placeholder:text-gray-500"
+                className={`w-full rounded-md border-2 py-[9px] pl-8 text-sm placeholder:text-gray-500 ${
+                  state.nameErrorMsg ? "border-red-500" : "border-gray-200"
+                }`}
                 id="name"
                 type="text"
                 name="name"
                 placeholder="이름을 입력하세요."
                 required
+                defaultValue={state.input?.name}
               />
             </div>
           </div>
@@ -52,12 +55,15 @@ export default function SignupForm() {
             </div>
             <div className="relative">
               <input
-                className="w-full rounded-md border border-gray-200 py-[9px] pl-8 text-sm outline-2 placeholder:text-gray-500"
+                className={`w-full rounded-md border-2 py-[9px] pl-8 text-sm placeholder:text-gray-500 ${
+                  state.idErrorMsg ? "border-red-500" : "border-gray-200"
+                }`}
                 id="id"
                 type="text"
                 name="id"
                 placeholder="아이디를 입력하세요."
                 required
+                defaultValue={state.input?.id}
               />
             </div>
           </div>
@@ -75,17 +81,19 @@ export default function SignupForm() {
             </div>
             <div className="relative">
               <input
-                className="w-full rounded-md border border-gray-200 py-[9px] pl-8 text-sm outline-2 placeholder:text-gray-500"
+                className={`w-full rounded-md border-2 py-[9px] pl-8 text-sm placeholder:text-gray-500 ${
+                  state.passwordErrorMsg ? "border-red-500" : "border-gray-200"
+                }`}
                 id="password"
                 type="password"
                 name="password"
                 placeholder="비밀번호를 입력하세요."
                 required
+                defaultValue={state.input?.password}
               />
             </div>
           </div>
         </div>
-        <input type="hidden" name="redirectTo" />
         <div>
           <SignUpButton isPending={isPending} />
         </div>
