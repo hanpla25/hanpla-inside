@@ -6,8 +6,7 @@ type Params = Promise<{ abbr: string }>;
 export default async function GalleryPage(props: { params: Params }) {
   const params = await props.params;
   const abbr = params.abbr;
-  const data = await fetchGalleryName(abbr);
-  const gallName = data?.gall_name;
+  const gallName = await fetchGalleryName(abbr);
 
   const recentGalleryData = {
     abbr: abbr,
@@ -17,7 +16,11 @@ export default async function GalleryPage(props: { params: Params }) {
 
   return (
     <div>
-      <RecentGallerySaver recentGalleryData={recentGalleryData} gallName={gallName} />
+      <RecentGallerySaver
+        recentGalleryData={recentGalleryData}
+        gallName={gallName}
+      />
+      asd
     </div>
   );
 }

@@ -31,12 +31,12 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-7xl mx-auto`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-5xl mx-auto`}
       >
         <div className="bg-white">
           <Header />
           <Nav />
-          <div className="min-h-[78vh]">{children}</div>
+          <div className="min-h-[100vh]">{children}</div>
           <Footer />
         </div>
       </body>

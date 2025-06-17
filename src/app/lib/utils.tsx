@@ -105,4 +105,51 @@ export function getRecentGalleries(): RecentGallery[] {
   }
 }
 
+export function setRecentGalleries(newItem: RecentGallery) {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    let items: RecentGallery[] = [];
 
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) {
+        items = parsed;
+      }
+    }
+
+    items = items.filter((item) => item.abbr !== newItem.abbr);
+
+    const newItems = [newItem, ...items];
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newItems));
+
+    return newItems;
+  } catch (error) {
+    console.error("최근 방문 갤러리 저장 오류:", error);
+    return [];
+  }
+}
+
+export function removeRecentGallery(abbrToRemove: string): RecentGallery[] {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) return [];
+
+    const parsed = JSON.parse(stored);
+    if (!Array.isArray(parsed)) return [];
+
+    const filtered = parsed.filter(
+      (item: unknown) =>
+        typeof item === "object" &&
+        item !== null &&
+        (item as RecentGallery).abbr !== abbrToRemove
+    );
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
+
+    return filtered;
+  } catch (error) {
+    console.error("최근 방문 갤러리 삭제 오류:", error);
+    return [];
+  }
+}

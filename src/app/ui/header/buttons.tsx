@@ -22,7 +22,7 @@ export function ModalCloseButton({ onClick }: { onClick: () => void }) {
 export function ModalItemDeleteButton({ onClick }: { onClick: () => void }) {
   return (
     <button onClick={onClick}>
-      <Image src="/x_button.png" alt="삭제" width={16} height={16} />
+      <Image src="/x_button.png" alt="삭제" width={16} height={16} className="cursor-pointer" />
     </button>
   );
 }

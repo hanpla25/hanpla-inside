@@ -38,7 +38,7 @@ export default function RecentVisitModal({
 
   if (allItems.length === 0) {
     return (
-      <div className="bg-white border border-gray-300 rounded shadow-lg z-10 w-full max-w-7xl">
+      <div className="bg-white border border-gray-300 shadow-lg z-10 w-full">
         <p className="text-center py-13 text-sm font-light">
           최근 방문한 갤러리가 없습니다.
         </p>
@@ -50,13 +50,13 @@ export default function RecentVisitModal({
   }
 
   return (
-    <div className="bg-white border border-gray-300 rounded shadow-lg z-10 w-full max-w-7xl">
+    <div className="bg-white border border-gray-300 shadow-lg z-10 w-full">
       <ul
         {...swipeHandlers}
         className="grid grid-cols-2 grid-rows-3 gap-2 text-sm text-gray-700"
       >
         {pageItems.map((item, index) => (
-          <RecentVisitItem item={item} key={index} />
+          <RecentVisitItem item={item} key={index} setAllItems={setAllItems} />
         ))}
       </ul>
 

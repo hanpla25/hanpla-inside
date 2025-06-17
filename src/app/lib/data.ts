@@ -25,9 +25,7 @@ export async function fetchGalleries(): Promise<Gallery[]> {
   return data;
 }
 
-export async function fetchGalleryName(abbr: string): Promise<{
-  gall_name: string;
-}> {
+export async function fetchGalleryName(abbr: string): Promise<string> {
   const supabase = await createClient();
 
   const { data, error } = await supabase
@@ -41,7 +39,7 @@ export async function fetchGalleryName(abbr: string): Promise<{
     redirect("/");
   }
 
-  return data;
+  return data.gall_name;
 }
 
 export async function fetchRealtimePosts(): Promise<Post[]> {
