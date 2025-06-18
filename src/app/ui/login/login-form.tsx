@@ -4,23 +4,29 @@ import { LoginFormState } from "@/app/lib/types";
 import { LoginButton } from "./buttons";
 import { useActionState } from "react";
 import { login } from "@/app/lib/action";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import LoginLinks from "./login-links";
 
 export default function LoginForm() {
   const initialState: LoginFormState = {};
   const [state, formAction, isPending] = useActionState(login, initialState);
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const pathname = usePathname();
+
+  const isHome = pathname === "/";
 
   return (
-    <form className="space-y-3" action={formAction}>
-      <div className="px-6 pb-4 pt-8">
-        <h1 className=" mb-3 text-2xl">로그인</h1>
+    <form className="space-y-3 p-2" action={formAction}>
+      <div className={`"${!isHome ? "px-6 pb-4 pt-8" : "px-0 pb-0 pt-0"} `}>
+        {!isHome && <h1 className="mb-3 text-2xl">로그인</h1>}
         <div className="w-full">
           <div>
             <div className="flex items-center text-xs my-5">
               <label
-                className="block text-xs font-medium text-gray-900"
+                className={`${
+                  isHome ? "sr-only" : "block text-xs font-medium text-gray-900"
+                }`}
                 htmlFor="id"
               >
                 아이디
@@ -37,7 +43,7 @@ export default function LoginForm() {
                 id="id"
                 type="text"
                 name="id"
-                placeholder="아이디를 입력하세요."
+                placeholder={`${isHome ? "아이디" : "아이디를 입력하세요."}`}
                 required
                 defaultValue={state.input?.id}
               />
@@ -46,7 +52,9 @@ export default function LoginForm() {
           <div className="mt-4">
             <div className="flex items-center text-xs my-5">
               <label
-                className="block text-xs font-medium text-gray-900"
+                className={`${
+                  isHome ? "sr-only" : "block text-xs font-medium text-gray-900"
+                }`}
                 htmlFor="password"
               >
                 비밀번호
@@ -63,7 +71,9 @@ export default function LoginForm() {
                 id="password"
                 type="password"
                 name="password"
-                placeholder="비밀번호를 입력하세요."
+                placeholder={`${
+                  isHome ? "비밀번호" : "비밀번호를 입력하세요."
+                }`}
                 required
                 defaultValue={state.input?.password}
               />
@@ -75,6 +85,7 @@ export default function LoginForm() {
           <LoginButton isPending={isPending} />
         </div>
       </div>
+      <LoginLinks />
     </form>
   );
 }

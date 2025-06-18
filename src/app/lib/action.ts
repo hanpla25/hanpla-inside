@@ -157,8 +157,8 @@ export async function login(
 
   const token = jwt.sign(
     {
-      user_id: user.id,
-      username: user.username,
+      user_id: user.user_id,
+      user_name: user.user_name,
       created_at: user.created_at,
     },
     JWT_SECRET,

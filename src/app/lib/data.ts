@@ -1,14 +1,8 @@
 import { redirect } from "next/navigation";
 import { createClient } from "../utils/supabase/server";
-import { Gallery, Post } from "./types";
+import { Gallery, Post, UserPayload, } from "./types";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
-
-type UserPayload = {
-  user_id: string;
-  username: string;
-  created_at: string;
-};
 
 const JWT_SECRET = process.env.JWT_SECRET!;
 
@@ -67,9 +61,11 @@ export async function getUserFromToken(): Promise<UserPayload | null> {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as UserPayload;
+    console.log("decoded token:", decoded); // 👈 이걸 꼭 찍어보세요
+
     return {
       user_id: decoded.user_id,
-      username: decoded.username,
+      user_name: decoded.user_name,
       created_at: decoded.created_at,
     };
   } catch {

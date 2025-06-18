@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-5xl mx-auto`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-5xl mx-auto bg-[#ebecf1] lg:bg-white`}
       >
         <div className="bg-white">
           <Header />

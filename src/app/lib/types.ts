@@ -45,3 +45,9 @@ export type LoginFormState = {
     name?: string;
   };
 };
+
+export type UserPayload = {
+  user_id: string;
+  user_name: string;
+  created_at: string;
+};
